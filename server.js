@@ -36,10 +36,8 @@ app.get('api/timestamp', (req, res) => {
 });
 
 app.get('/api/timestamp/:date_string', (req, res) => {  
-  console.log('number date', new Date(1454284800000));
-  const dateString = isNaN(req.params.date_string) ? parseInt(req.params.date_string) : req.params.date_string;
-  const date = new Date(dateString);
-  console.log(date);
+  console.log('number date', new Date(1454284800000), isNaN(1454284800000));
+  const date = new Date(!isNaN(req.params.date_string) ? parseInt(req.params.date_string) : req.params.date_string);
   
   res.json(date.toString() !== 'Invalid Date' ? {'unix': date.getTime(), 'utc': date.toUTCString()} : {"unix": null, "utc" : "Invalid Date" });
 });
