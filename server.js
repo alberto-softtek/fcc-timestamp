@@ -32,9 +32,14 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 
+app.get("/api/timestamp", function (req, res) {
+  res.send('hello from timestamp');
+});
+
 app.get('/api/timestamp/:date_string', (req, res) => {  
+  console.log(req.params.date_string);
   const dateVar = !isNaN(req.params.date_string) ? parseInt(req.params.date_string) : req.params.date_string;
-  const date = new Date();
+  const date = req.params.date_string !== 'undefined' ? new Date(dateVar) : new Date();
   
   res.json(date.toString() !== 'Invalid Date' ? {'unix': date.getTime(), 'utc': date.toUTCString()} : {"unix": null, "utc" : "Invalid Date" });
 });
