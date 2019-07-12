@@ -33,7 +33,8 @@ var listener = app.listen(process.env.PORT, function () {
 
 
 app.get("/api/timestamp", function (req, res) {
-  res.send('hello from timestamp');
+  const date = new Date();
+  res.json({'unix': date.getTime(), 'utc': date.toUTCString()});
 });
 
 app.get('/api/timestamp/:date_string', (req, res) => {  
