@@ -32,5 +32,7 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 app.get('/api/timestamp/:date_string', (req, res) => {
-  console.log(req.query);
+  const date = new Date(req.params.date_string);
+  console.log(date);
+  res.json({date: date.toString() !== 'Invalid Date' ? date : 'Invalid Date'});
 });
