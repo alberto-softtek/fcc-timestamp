@@ -31,13 +31,10 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-app.get('api/timestamp', (req, res) => {
-  res.send(new Date());
-});
 
 app.get('/api/timestamp/:date_string', (req, res) => {  
-  console.log('number date', new Date(1454284800000), isNaN(1454284800000));
-  const date = new Date(!isNaN(req.params.date_string) ? parseInt(req.params.date_string) : req.params.date_string);
+  const dateVar = !isNaN(req.params.date_string) ? parseInt(req.params.date_string) : req.params.date_string;
+  const date = new Date();
   
   res.json(date.toString() !== 'Invalid Date' ? {'unix': date.getTime(), 'utc': date.toUTCString()} : {"unix": null, "utc" : "Invalid Date" });
 });
